@@ -146,6 +146,36 @@ html, body, [class*="css"] {
     background-color: #7c3aed;
 }
 
+/* 输入框样式 —— 强制白底黑字，确保清晰可见 */
+[data-testid="stTextInput"] input,
+[data-testid="stTextArea"] textarea,
+[data-testid="stNumberInput"] input {
+    background-color: #ffffff !important;
+    color: #1a1a2e !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 8px !important;
+}
+
+/* Slider 标签与数值颜色 */
+[data-testid="stSlider"] {
+    color: #1a1a2e !important;
+}
+[data-testid="stSlider"] [role="slider"] {
+    background-color: #7c3aed !important;
+}
+
+/* Expander 更新进度栏背景与边框 */
+[data-testid="stExpander"] {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+[data-testid="stExpanderDetails"] {
+    background-color: #ffffff;
+    padding: 12px;
+    border-radius: 0 0 12px 12px;
+}
+
 /* 按钮 */
 .stButton > button {
     background: #7c3aed;
