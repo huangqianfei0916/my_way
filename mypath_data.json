@@ -1,0 +1,55 @@
+{
+  "user": {
+    "name": "小明同学"
+  },
+  "goals": [
+    {
+      "id": 1,
+      "title": "成为 AI Agent 工程师",
+      "desc": "掌握构建 AI Agent 的能力，并完成自己的产品",
+      "start_date": "2024-05-20",
+      "phase": "技能积累阶段",
+      "progress": 35,
+      "active": true
+    }
+  ],
+  "records": [
+    {
+      "id": 4,
+      "date": "2026-05-20",
+      "time": "21:58",
+      "title": "\n\n你好\n\n",
+      "desc": "\n\n你好\n\n",
+      "tag": "项目开发",
+      "goal_id": 1
+    },
+    {
+      "id": 1,
+      "date": "2024-05-27",
+      "time": "21:30",
+      "title": "完成了 Agent 的 Memory 模块",
+      "desc": "实现了基于向量数据库的长期记忆功能，支持语义搜索",
+      "tag": "项目开发",
+      "goal_id": 1
+    },
+    {
+      "id": 2,
+      "date": "2024-05-27",
+      "time": "20:15",
+      "title": "学习了 ReAct Agent 论文",
+      "desc": "深入理解了 ReAct 的思想，准备应用到自己的项目中",
+      "tag": "学习",
+      "goal_id": 1
+    },
+    {
+      "id": 3,
+      "date": "2024-05-25",
+      "time": "19:40",
+      "title": "完成了 Tool Router 的设计",
+      "desc": "设计了动态路由机制，让 Agent 能够选择合适的工具",
+      "tag": "项目开发",
+      "goal_id": 1
+    }
+  ],
+  "reviews": 5
+}
