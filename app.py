@@ -425,7 +425,7 @@ def migrate(d):
     # 确保顶层字段齐全
     d.setdefault("objectives", [])
     d.setdefault("records", [])
-    d.setdefault("user", {"name": "小明同学"})
+    d.setdefault("user", {"name": "同学"})
     return d
 
 def load_data():
