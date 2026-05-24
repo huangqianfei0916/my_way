@@ -8,7 +8,6 @@ st.set_page_config(
     page_title="MyPath",
     page_icon="✦",
     layout="wide",
-    initial_sidebar_state="expanded",
 )
 
 # ── 全局 CSS ─────────────────────────────────────────────────────────────────
@@ -47,12 +46,37 @@ html, body, [class*="css"] {
 .stApp { background: var(--bg) !important; }
 #MainMenu, footer, header { visibility: hidden; }
 
-/* ══ 侧边栏 ═══════════════════════════════════════════════════════ */
-[data-testid="stSidebar"] {
-    background: var(--surface) !important;
-    border-right: 1px solid var(--border) !important;
+/* ══ 顶部导航栏 ═════════════════════════════════════════════════ */
+.nav-bar {
+    display: flex; align-items: center; gap: 4px;
+    padding: 12px 0 16px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
 }
-[data-testid="stSidebar"] > div:first-child { padding: 24px 16px !important; }
+.nav-brand {
+    display: flex; align-items: center; gap: 8px; margin-right: 16px;
+}
+.nav-brand-mark {
+    width: 28px; height: 28px;
+    background: var(--ink-1); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    color: #FAFAF7;
+    font-family: 'Fraunces', serif; font-size: 0.85rem; font-weight: 700;
+}
+.nav-brand-name {
+    font-family: 'Fraunces', serif;
+    font-size: 0.95rem; font-weight: 600;
+    color: var(--ink-1); letter-spacing: -0.01em;
+}
+.nav-spacer { flex: 1; }
+.nav-user {
+    font-size: 0.82rem; color: var(--ink-2);
+    display: flex; align-items: center; gap: 6px;
+}
+
+/* ══ 隐藏默认侧边栏 ═══════════════════════════════════════════ */
+[data-testid="stSidebar"] { display: none !important; }
+[data-testid="stSidebarCollapsedControl"] { display: none !important; }
 
 /* ══ 所有按钮基础（导航 / 普通操作） ════════════════════════════ */
 .stButton > button {
@@ -185,25 +209,6 @@ div[data-testid^="stButton"] > button[data-testid*="confirm_"] { }
 }
 
 /* ══ 自定义组件 ══════════════════════════════════════════════════ */
-.brand {
-    display: flex; align-items: center; gap: 10px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 16px;
-}
-.brand-mark {
-    width: 32px; height: 32px;
-    background: var(--ink-1); border-radius: 7px;
-    display: flex; align-items: center; justify-content: center;
-    color: #FAFAF7;
-    font-family: 'Fraunces', serif; font-size: 0.95rem; font-weight: 700;
-}
-.brand-name {
-    font-family: 'Fraunces', serif;
-    font-size: 1.05rem; font-weight: 600;
-    color: var(--ink-1); letter-spacing: -0.01em;
-}
-
 .page-title {
     font-family: 'Fraunces', serif;
     font-size: 1.65rem; font-weight: 600;
@@ -486,31 +491,23 @@ def delete_record(rec_id):
     save_data(data)
     st.session_state.data = data
 
-# ── 侧边栏 ────────────────────────────────────────────────────────────────────
-with st.sidebar:
-    st.markdown("""
-    <div class='brand'>
-        <div class='brand-mark'>M</div>
-        <div class='brand-name'>MyPath</div>
+# ── 顶部导航栏 ────────────────────────────────────────────────────────────────
+st.markdown(f"""
+<div class='nav-bar'>
+    <div class='nav-brand'>
+        <div class='nav-brand-mark'>M</div>
+        <div class='nav-brand-name'>MyPath</div>
     </div>
-    """, unsafe_allow_html=True)
+</div>
+""", unsafe_allow_html=True)
 
-    nav_items = [("🏠","首页"), ("🎯","目标"), ("📅","时间线"), ("🔄","回顾"), ("📦","存档"), ("⚙️","设置")]
-    for icon, name in nav_items:
+nav_items = [("🏠","首页"), ("🎯","目标"), ("📅","时间线")]
+nav_cols = st.columns([1, 1, 1, 4])
+for i, (icon, name) in enumerate(nav_items):
+    with nav_cols[i]:
         if st.button(f"{icon}  {name}", key=f"nav_{name}", use_container_width=True):
             st.session_state.page = name
             st.rerun()
-
-    st.markdown("<div style='height:1px;background:var(--border);margin:14px 0;'></div>", unsafe_allow_html=True)
-    st.markdown(f"""
-    <div class='user-info'>
-        <div class='avatar'>👤</div>
-        <div>
-            <div class='user-name'>{data['user']['name']}</div>
-            <div class='user-plan'>免费版</div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # 首页
